@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Milagre</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#" onclick="showHome()">Home</a></li>
+            <li><a href="#" onclick="showSlideshow()">Her Gallery</a></li>
+            <li><a href="#" onclick="showMessage()">Special Message</a></li>
+        </ul>
+    </nav>
+
+    <!-- Homepage -->
+    <div id="homepage" class="main-content">
+        <div class="hero">
+            <div class="floating-element">✨</div>
+            <div class="floating-element">💎</div>
+            <div class="floating-element">🌟</div>
+            <div class="floating-element">💖</div>
+
+            <h1 class="hero-title1">She's Absolutely Amazing</h1>
+            <p class="subtitle">A surprise for someone truly special</p>
+            <p class="description">
+                There are people who light up every room they enter, who make the world brighter 
+                just by being in it. This is a tribute to one of those rare and wonderful souls - 
+                someone whose beauty, kindness, and spirit deserve to be celebrated every single day.
+            </p>
+            <a href="#" class="cta-button" onclick="showSlideshow()">See Why She's Special</a>
+        </div>
+    </div>
+
+    <!-- Slideshow Page -->
+    <div id="slideshow" class="slideshow-page">
+        <div class="slideshow-header">
+            <h2>A Gallery of Beauty</h2>
+            <p>Every photo tells a story of Milagre</p>
+        </div>
+        <div class="slideshow-description">
+            <p>Here are some of the most beautiful moments captured, showcasing her radiant smile, natural elegance, and pure joy. Each image is a testament to her incredible spirit and the love she brings into our lives.</p>
+        <div class="slideshow-container">
+            <div class="slide active">
+                <div class="slide-image-container">
+                    <img src="_images/pic6.jpg" alt="Beautiful smile">
+                </div>
+                <h3>Her Radiant Smile</h3>
+                <p>A smile that could light up the darkest day. There's something magical about the way her happiness is contagious, spreading joy to everyone around her.</p>
+            </div>
+
+            <div class="slide">
+                <div class="slide-image-container">
+                    <img src="_images/pic3.jpg" alt="Elegant portrait">
+                </div>
+                <h3>Natural Elegance</h3>
+                <p>Grace and beauty that comes from within. She carries herself with such natural elegance that makes everyone stop and take notice.</p>
+            </div>
+
+            <div class="slide">
+                <div class="slide-image-container">
+                    <img src="_images/pic4.jpg" alt="Joyful moment">
+                </div>
+                <h3>Pure Joy</h3>
+                <p>Capturing moments of pure happiness. Her laughter is like music, and her joy is absolutely infectious. She makes life more beautiful.</p>
+            </div>
+
+            <div class="slide">
+                <div class="slide-image-container">
+                    <img src="_images/pic5.jpg" alt="Thoughtful moment">
+                </div>
+                <h3>Beautiful Soul</h3>
+                <p>Inner beauty that shines through. She's not just beautiful on the outside - her heart, her mind, and her spirit make her truly extraordinary.</p>
+            </div>
+
+            <div class="slide">
+                <div class="slide-image-container">
+                    <img src="_images/pic1.jpg" alt="Stunning portrait">
+                </div>
+                <h3>Simply Perfect</h3>
+                <p>Some people are just perfectly themselves, and that's what makes them so incredibly special. She's one of those rare gems.</p>
+            </div>
+
+            <div class="slide-controls">
+                <button class="slide-btn" onclick="previousSlide()">Previous</button>
+                <button class="slide-btn" onclick="nextSlide()">Next</button>
+            </div>
+
+            <div class="slide-indicators">
+                <span class="indicator active" onclick="currentSlide(1)"></span>
+                <span class="indicator" onclick="currentSlide(2)"></span>
+                <span class="indicator" onclick="currentSlide(3)"></span>
+                <span class="indicator" onclick="currentSlide(4)"></span>
+                <span class="indicator" onclick="currentSlide(5)"></span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSlideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const indicators = document.querySelectorAll('.indicator');
+
+        // Navigation functions
+        function showHome() {
+            document.getElementById('homepage').style.display = 'block';
+            document.getElementById('slideshow').style.display = 'none';
+        }
+
+        function showSlideshow() {
+            document.getElementById('homepage').style.display = 'none';
+            document.getElementById('slideshow').style.display = 'block';
+        }
+
+        function showMessage() {
+            const messages = [
+                "She's one in a million! 💖",
+                "Her beauty radiates from within ✨",
+                "The world is brighter with her in it 🌟",
+                "She's absolutely incredible! 💎",
+                "A true angel among us 👑"
+            ];
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+            alert(randomMessage);
+        }
+
+        // Slideshow functions
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            indicators.forEach(indicator => indicator.classList.remove('active'));
+            
+            slides[index].classList.add('active');
+            indicators[index].classList.add('active');
+        }
+
+        function nextSlide() {
+            currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+            showSlide(currentSlideIndex);
+            createHeartEffect();
+        }
+
+        function previousSlide() {
+            currentSlideIndex = (currentSlideIndex - 1 + slides.length) % slides.length;
+            showSlide(currentSlideIndex);
+            createHeartEffect();
+        }
+
+        function currentSlide(index) {
+            currentSlideIndex = index - 1;
+            showSlide(currentSlideIndex);
+            createHeartEffect();
+        }
+
+        // Heart effect when changing slides
+        function createHeartEffect() {
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤️';
+            heart.className = 'heart';
+            heart.style.left = Math.random() * 90 + '%';
+            heart.style.top = Math.random() * 50 + 25 + '%';
+            document.body.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 3000);
+        }
+
+        // Create sparkle effects
+        function createSparkles() {
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    const sparkle = document.createElement('div');
+                    sparkle.className = 'sparkle';
+                    sparkle.style.left = Math.random() * 100 + '%';
+                    sparkle.style.top = Math.random() * 100 + '%';
+                    document.body.appendChild(sparkle);
+                    
+                    setTimeout(() => {
+                        sparkle.remove();
+                    }, 2000);
+                }, i * 400);
+            }
+        }
+
+        // Auto-advance slideshow
+        let slideInterval = setInterval(nextSlide, 6000);
+
+        // Pause auto-advance on hover
+        document.querySelector('.slideshow-container').addEventListener('mouseenter', () => {
+            clearInterval(slideInterval);
+        });
+
+        document.querySelector('.slideshow-container').addEventListener('mouseleave', () => {
+            slideInterval = setInterval(nextSlide, 6000);
+        });
+
+        // Add sparkle effects periodically
+        setInterval(createSparkles, 8000);
+
+        // Add interactive hover effects
+        document.querySelectorAll('.cta-button, .slide-btn').forEach(button => {
+            button.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-3px) scale(1.05)';
+            });
+            
+            button.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
